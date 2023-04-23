@@ -71,14 +71,39 @@ public class MaxHeap {
     }
 
     /**
+     * 替换栈顶元素
+     * @param replaced
+     */
+    public void replace(int replaced){
+        array[0] = replaced;
+        down(0);
+    }
+
+    /**
      * 堆的尾部添加元素
      */
     public boolean offer(int offered) {
-        return false;
+        if (size == array.length){
+            return false;
+        }
+        up(offered);
+        size++;
+        return true;
     }
 
     // 将 inserted 元素上浮；直至 offered 小于父元素或到堆顶
     private void up(int offered) {
+        int child = size;
+        while (child > 0){
+            int parent = (child - 1) / 2;
+            if (offered > array[parent]){
+                array[child] = array[parent];
+            }else {
+                break;
+            }
+            child = parent;
+        }
+        array[child] = offered;
     }
 
     // 将 parent 索引处的元素下潜；与两个孩子较大者交换，直至没孩子或者孩子没它大
@@ -108,7 +133,11 @@ public class MaxHeap {
 
     public static void main(String[] args) {
         int[] array = new int[]{1,2,3,4,5,6,7};
-        MaxHeap maxHeap = new MaxHeap(array);
+        MaxHeap maxHeap = new MaxHeap(8);
+        System.arraycopy(array, 0, maxHeap.array, 0, array.length);
+        maxHeap.heapify();
+        System.out.println(Arrays.toString(maxHeap.array));
+        maxHeap.offer(8);
         System.out.println(Arrays.toString(maxHeap.array));
     }
 }
