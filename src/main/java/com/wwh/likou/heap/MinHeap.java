@@ -5,15 +5,15 @@ import java.util.Arrays;
 /**
  * 大顶堆
  */
-public class MaxHeap {
+public class MinHeap {
     int[] array;
     int size;
 
-    public MaxHeap(int capacity) {
+    public MinHeap(int capacity) {
         this.array = new int[capacity];
     }
 
-    public MaxHeap(int[] array){
+    public MinHeap(int[] array){
         this.array = array;
         this.size = array.length;
         heapify();
@@ -72,7 +72,7 @@ public class MaxHeap {
 
     /**
      * 替换栈顶元素
-     * @param replaced
+     * @param replaced 替换的值
      */
     public void replace(int replaced){
         array[0] = replaced;
@@ -96,7 +96,7 @@ public class MaxHeap {
         int child = size;
         while (child > 0){
             int parent = (child - 1) / 2;
-            if (offered > array[parent]){
+            if (offered < array[parent]){
                 array[child] = array[parent];
             }else {
                 break;
@@ -110,17 +110,17 @@ public class MaxHeap {
     private void down(int parent) {
         int left = parent * 2 + 1;
         int right = left + 1;
-        int max = parent;
-        if (left < size && array[left] > array[max]) {
-            max = left;
+        int min = parent;
+        if (left < size && array[left] < array[min]) {
+            min = left;
         }
-        if (right < size && array[right] > array[max]) {
-            max = right;
+        if (right < size && array[right] < array[min]) {
+            min = right;
         }
         // 找到了更到的孩子
-        if (max != parent) {
-            swap(max, parent);
-            down(max);
+        if (min != parent) {
+            swap(min, parent);
+            down(min);
         }
     }
 
@@ -140,7 +140,7 @@ public class MaxHeap {
 //        maxHeap.offer(8);
 //        System.out.println(Arrays.toString(maxHeap.array));
 
-        MaxHeap maxHeap = new MaxHeap(array);
+        MinHeap maxHeap = new MinHeap(array);
         System.out.println(Arrays.toString(maxHeap.array));
 
         System.out.println("--------------------------");
