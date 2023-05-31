@@ -19,6 +19,10 @@ public class MinHeap {
         heapify();
     }
 
+    public boolean isFull(){
+        return size == array.length;
+    }
+
     // 建堆
     /**
      * 建堆流程：

@@ -1,7 +1,7 @@
 package com.wwh.likou.heap;
 
 /**
- * 获取第k大元素
+ * 求数组中第k大元素
  * <p>
  * 解题思路：
  * 1.向小顶堆放入前k个元素
